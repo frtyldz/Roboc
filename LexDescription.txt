@@ -1,0 +1,92 @@
+%option main
+digit        [0-9]
+upCase       [A-Z]
+loCase       [a-z]
+
+int          [0-9]+
+double       [+-]?{digit}*(\.){digit}+
+letter       [a-zA-z]
+alphabetic   ({upCase}|{loCase})+
+char         \'.\'
+
+comment      (%%)(.)*(\n)
+mulComments  "/*"([^*]|\*+[^*/])*\*+"/"
+numeric      {digit}+
+string       \"{text}\"
+text         ([^"]|[\\]["])*
+
+alphanumeric {alphabetic}({digit}|{upCase}|{loCase}|_)*
+
+%%
+main             printf("MAIN ");
+for              printf("FOR ");
+void             printf("VOID ");
+if               printf("IF ");
+other            printf("OTHER");
+while            printf("WHILE ");
+do               printf("DO ");
+print            printf("PRINT ");
+println          printf("PRINTLN ");
+int              printf("INT ");
+float            printf("FLOAT ");
+double           printf("DOUBLE ");
+char             printf("CHAR ");
+bool             printf("BOOL ");
+string           printf("STRING ");
+turn             printf("TURN ");
+readData         printf("READ_DATA ");
+grab             printf("GRAB ");
+move             printf("MOVE ");
+releaseData      printf("RELEASE_DATA ");
+sendData         printf("SEND_DATA ");
+rcvData          printf("RCV_DATA ");
+true             printf("TRUE ");
+false            printf("FALSE ");
+false            printf("FALSE ");
+
+[_]              printf("UNDERLINE ");
+
+{mulComments}    printf("\n");
+{comment}        printf("\n");
+{string}         printf("STR ");
+{char}           printf("CH ");
+{alphanumeric}   printf("IDENT ");
+{double}         printf("DOUB ");
+{int}            printf("INTEGER ");
+
+[+][+]           printf("INCREMENT ");
+[-][-]           printf("DECREMENT ");
+[}]              printf("RBRACE ");
+[{]              printf("LBRACE ");
+[\]]             printf("R_SQ_BRA ");
+[\[]             printf("L_SQ_BRA ");
+[)]              printf("RPARAN ");
+[(]              printf("LPARAN ");
+[+]              printf("SUM_OP ");
+[-]              printf("SUB_OP ");
+[*]              printf("MUL_OP ");
+[/]              printf("DIV_OP ");
+[\;]             printf("SEMICOLON ");
+[+][=]           printf("PLUS_EQ_OP ");
+[-][=]           printf("MINUS_EQ_OP ");
+[*][=]           printf("MUL_EQ_OP ");
+[/][=]           printf("DIV_EQ_OP ");
+[%][=]           printf("MOD_EQ_OP ");
+[=][=]           printf("EQUALS_OP ");
+[=]              printf("ASSIGN_OP ");
+[']              printf("SINGLE_QUOT_MARK ");
+[\"]             printf("QUOT_MARK ");
+[<]              printf("L_ANG_BRA ");
+[>]              printf("R_ANG_BRA ");
+[?]              printf("QUES_MARK ");
+[!]              printf("EXCLA_MARK ");
+[,]              printf("COMMA ");
+[#]              printf("SHARP ");
+[&]              printf("AMPERSAND ");
+[\\]             printf("B_SLASH ")
+[%]              printf("PERCENT ");
+[%][%]           printf("COMMENT_LINE ");
+[\|]             printf("OR_MARK ");
+[\.]             printf("DOT ");
+. ;
+%%

@@ -1,0 +1,154 @@
+
+
+<program>		::= <main_func>
+				|	<main_func> <func_list>
+
+<func_list>		::= <function> 
+				|	<function> <func_list>
+
+<main_func>		::= void main () <block_stmt>
+
+<function>		::= <return_types> <identifier> ( <param_list> ) { <stmt_list> <return_stmt> }
+
+<param_list>	::= /* empty */
+				|	<parameter> , <param_list>
+
+<parameter>		::= <pri_Vars> <identifier>
+
+<block_stmt>	::= { <stmt_list>? }
+
+<stmt_list>		::= <stmt> 
+				|	<stmt> <stmt_list>
+			
+<stmt>			::= <basic_stmt>
+				|	<matched>
+				|	<unmatched>
+
+<basic_stmt>	::= <assign_stmt> 
+				|	<loop_stmts> 
+				|	<return_stmt>
+				|	<declera_stmt>
+				|	<empty_stmt>
+				|	<block_stmt>
+
+<empty_stmt>	::= ;
+
+<matched>		::=	if <logical_expr> <matched> other <matched>
+				|	<basic_stmt>
+				
+				
+<unmatched>	::=		if <logical_expr> <stmt> 
+				|	if <logical_expr> <matched> other <unmatched>
+				
+<loop_stmts>	::= <while_stmt>
+				|	<for_stmt>
+				|	<do_while_stmt>
+
+<while_stmt> 	::= while <logical_expr> <statement>
+
+<for_stmt>		::=	for <decleration_list> ; <logical_expr> ; <for_assign_stmt_list> ; <statement>
+
+<for_assign_stmt_list>	::=  <for_assign_stmt> , <for_assign_stmt_list>
+
+<for_assign_stmt>	::=  <identifier> = <operations>
+					|    <identifier> ++
+					|    <identifier> --
+					|    /*   empty   */
+
+<do_while_stmt>	::=	do <block_stmt> while <logical_expr> ;
+
+<return_stmt>	::= return ;
+				|	return <logical_expr> ;
+				|	return <identifier> ;
+				|	return <int> ;
+
+<logical_expr>	::= true | false
+				|	<logical_expr> <relations> <operations> 
+				|	<operations> <relations> <logical_expr>
+				|	<logical_expr> <relations> <logical_expr>
+
+<relations>		::=	==
+				|	<
+				|	>
+				|	!=
+				|	<=
+				|	>=
+				|	&
+				|	|
+				
+<id_list>		::= <identifier>
+				|	<id_list> , <identifier>
+				
+<declera_stmt>	::= <pri_Vars> <identifier> = <operations> ;
+				|	<pri_Vars> <identifier> ;
+				
+<assign_stmt>	::= <identifier> = <identifier> ;
+				|	<identifier> = <operations> ;
+				
+
+<operations>    ::= <term>
+				| 	<operations> + <term>
+				|	<operations> - <term>
+
+<term>         	::= <primary>
+				| 	<term> 	*  <primary>
+				| 	<term> 	/  <primary>
+				|	<term>	%  <primary>
+				
+				
+<primary>       ::=	<constants>
+				|	<identifier>
+				|	<primitiveFuncCall>
+				|	<function_call>
+				|	( <operations> )
+
+<function_call>	::=	<identifier> ( <func_call_para_list>? ) ;
+
+<func_call_para_list>::=	<primary> | <primary> , <func_call_para_list>
+
+<constants>   	::= <string>
+				|	<number>
+				
+<primitiveFuncCall> ::= move ( <primary> , <primary> ) ;
+				|	grab ( <primary> ) ;
+				|	turn ( <primary> , <primary> ) ;
+				|	sendData ( <primary> , <primary> ) ;
+				|	rcvData ( <primary> ,  <primary>) ;
+				|	releaseData ( <primary> ,  <primary>) ;
+				|	readData ( <primary> ,  <primary>) ;
+				|	print (<string> ) ;
+				|	println (<string> ) ;
+
+<return_types>	::= <pri_Vars> | void
+
+<pri_Vars>  ::= bool | int | char |	string | double | float
+				
+The following definitions are hardcoded into the lexical scanner:
+
+
+<string> 		::= " <text> "
+<text>          ::=	<str_character> | <text> <str_character> 
+<identifier>    ::= <letter>
+				|	<identifier> <letter>
+				| 	<identifier> <decimal digit>
+				| 	<identifier>
+
+<str_character> ::= <tabulation> | <space> | '!' | '#' | ... | '[' | ']' | ... | 0xFF
+<space> ::= 0x20
+<tabulation> ::= 0x09
+
+<int>			::= <digit> | <digit> <int>
+<letter>        ::= A|B|C ... |Z|a|b|c ... |z
+<digit> ::= 0|1| ... |9
+
+
+
+
+
+
+
+
+
+
+
+

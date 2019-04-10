@@ -1,0 +1,55 @@
+/*
+	@Authors
+	Samet Demir
+	Fırat Yıldız
+	Yusuf Samsum
+
+	CS319 Project 1	Example Code 1
+*/
+
+void main() {
+	
+	int x1 = read(x1); %% reading data from a sensor given the sensor 1
+	int x2 = read(x2); %% reading data from a sensor given the sensor 2
+	int x3 = read(x3); %% reading data from a sensor given the sensor 3
+
+	int max = findMax(x1,x2,x3);
+
+	println("Maximum of data of sensor 5 is " + max);
+
+	for int i = 0; i < max; i++
+	{
+		if i == 0 {
+			move(5,0); %% moving 5 mm forward
+			println("Moved 5 millimeters forward");
+		}
+		other if i > 3 {
+			turn(30,0); %% turning 30 degrees right
+			println("Turned 30 degrees right");
+		}
+		other {
+			move(5,1); %% moving 5 mm backward
+			println("Moved 5 millimeters backward");
+			
+			turn(30,1); %% turning 30 degrees right
+			println("Turned 30 degrees left");
+		}
+	}
+
+	grab(); %% grabbing the object
+	println("The object is grabbed");
+	
+	int robotID = 536842;
+	
+	sendData( x1, 53642 );
+	println("=== End of Main ===");
+}
+
+int findMax ( int x1, int x2, int x3 ) {
+	int max = x1;
+	if max < x2
+		max = x2
+	if max < x3
+		max = x3
+	return max;
+}
